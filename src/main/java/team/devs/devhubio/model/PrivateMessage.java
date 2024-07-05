@@ -1,12 +1,38 @@
 package team.devs.devhubio.model;
 
+import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+@Entity
 public class PrivateMessage {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String message;
-    private String touser;
-    private String fromuser;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "message")
+    private String message;
+
+    @Column(name = "sendid")
+    private String sendid;
+
+    @Column(name = "receiveid")
+    private String receiveid;
+
+    @Column(name = "senddelyn")
+    private String senddelyn;
+
+    @Column(name = "redeivedelyn")
+    private String redeivedelyn;
+
+    @Column(name = "date")
+    private String date;
 
     public Long getId() {
         return id;
@@ -14,6 +40,22 @@ public class PrivateMessage {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getMessage() {
@@ -24,19 +66,43 @@ public class PrivateMessage {
         this.message = message;
     }
 
-    public String getTouser() {
-        return touser;
+    public String getSendid() {
+        return sendid;
     }
 
-    public void setTouser(String touser) {
-        this.touser = touser;
+    public void setSendid(String sendid) {
+        this.sendid = sendid;
     }
 
-    public String getFromuser() {
-        return fromuser;
+    public String getReceiveid() {
+        return receiveid;
     }
 
-    public void setFromuser(String fromuser) {
-        this.fromuser = fromuser;
+    public void setReceiveid(String receiveid) {
+        this.receiveid = receiveid;
+    }
+
+    public String getSenddelyn() {
+        return senddelyn;
+    }
+
+    public void setSenddelyn(String senddelyn) {
+        this.senddelyn = senddelyn;
+    }
+
+    public String getRedeivedelyn() {
+        return redeivedelyn;
+    }
+
+    public void setRedeivedelyn(String redeivedelyn) {
+        this.redeivedelyn = redeivedelyn;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
