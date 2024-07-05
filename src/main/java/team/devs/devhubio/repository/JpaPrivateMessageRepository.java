@@ -1,8 +1,8 @@
 package team.devs.devhubio.repository;
 
-import jakarta.persistence.EntityManager;
 import team.devs.devhubio.model.PrivateMessage;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +14,9 @@ public class JpaPrivateMessageRepository implements PrivateMessageRepository{
         this.em = em;
     }
 
+
     @Override
-    public PrivateMessage send(PrivateMessage privateMessage) {
+    public PrivateMessage save(PrivateMessage privateMessage) {
         em.persist(privateMessage);
         return privateMessage;
     }
@@ -27,18 +28,17 @@ public class JpaPrivateMessageRepository implements PrivateMessageRepository{
     }
 
     @Override
-    public Optional<PrivateMessage> findByNameR(String name) {
-        return em.createQuery("select m from PrivateMessage m where m.receiveid = name", PrivateMessage.class)
-                .setParameter("sendid", name)
-                .getResultList().stream().findAny();
+    public List<PrivateMessage> findBySendId(String sendid) {
+        return em.createQuery("select m from PrivateMessage m where m.sendid = sendid and m.senddyn = 'Y'", PrivateMessage.class)
+                .setParameter("sendid", sendid)
+                .getResultList();
     }
 
     @Override
-    public Optional<PrivateMessage> findByNameS(String name) {
-        return em.createQuery("select m from PrivateMessage m where m.receiveid = name", PrivateMessage.class)
-                .setParameter("receiveid", name)
-                .getResultList().stream().findAny();
-
+    public List<PrivateMessage> findByReceiveId(String receiveid) {
+        return em.createQuery("select m from PrivateMessage m where m.receiveid = :receiveid and m.receivedyn = 'Y'", PrivateMessage.class)
+                .setParameter("receiveid", receiveid)
+                .getResultList();
     }
 
     @Override
